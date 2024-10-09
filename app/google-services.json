@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "625486416730",
+    "project_id": "eams-ce5d6",
+    "storage_bucket": "eams-ce5d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625486416730:android:41049faa0b2c560dd20163",
+        "android_client_info": {
+          "package_name": "com.example.eams_project_fall2024"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC54A7DBVmp1o3veswW4vJzRewWsZ0OE1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
