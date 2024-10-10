@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private TextView loginLink;
     private Button signUpAttendeeButton;
+    private Button signUpOrganizerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         loginLink = findViewById(R.id.loginLink);
         signUpAttendeeButton = findViewById(R.id.signUpAttendeeButton);
+        signUpOrganizerButton = findViewById(R.id.signUpOrganizer);
 
         loginLink.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -28,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
         signUpAttendeeButton.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, AttendeeSignUpActivity.class));
+        });
+
+        signUpOrganizerButton.setOnClickListener(view ->{
+            startActivity(new Intent(MainActivity.this, OrganizerSignUpActivity.class));
         });
 
     }
