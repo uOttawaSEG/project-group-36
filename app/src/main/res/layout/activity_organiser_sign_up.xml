@@ -166,7 +166,7 @@
         app:layout_constraintTop_toBottomOf="@+id/OrganizerOrganisationName" />
 
     <TextView
-        android:id="@+id/loginLink"
+        android:id="@+id/organizerLoginLink"
         android:layout_width="222dp"
         android:layout_height="17dp"
         android:layout_gravity="center"
@@ -176,4 +176,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/OrganizerSignUpButton" />
+
+    <TextView
+        android:id="@+id/attendeeSignupLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="3dp"
+        android:text="Looking to be an Attendee? Sign up here"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/organizerLoginLink" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
