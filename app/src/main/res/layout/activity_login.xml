@@ -57,7 +57,7 @@
 
             <!-- Email Input -->
             <EditText
-                android:id="@+id/attendeeEmail"
+                android:id="@+id/loginEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
@@ -68,7 +68,7 @@
 
             <!-- Password Input -->
             <EditText
-                android:id="@+id/attendeePassword"
+                android:id="@+id/loginPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
