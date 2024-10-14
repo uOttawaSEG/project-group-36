@@ -1,191 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    tools:context=".MainActivity">
+    android:background="#121212"
+    android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/appLogo"
-        android:layout_width="115dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="48dp"
-        android:contentDescription="App Logo"
-        android:src="@drawable/ic_launcher_foreground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- App Name -->
     <TextView
         android:id="@+id/appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:fontFamily="sans-serif-light"
         android:text="EAMS"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textColor="#BB86FC"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appLogo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Tagline -->
     <TextView
         android:id="@+id/tagline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="Organiser Sign-Up"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Organizer Sign-Up"
+        android:textSize="18sp"
+        android:textColor="#03DAC6"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/appName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appName" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
 
-    <EditText
-        android:id="@+id/OrganizerFirstName"
+    <!-- Input Fields -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/inputCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="@color/white"
-        android:hint="First Name"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tagline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tagline"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintWidth_percent="0.9" />
-
-    <EditText
-        android:id="@+id/OrganizerLastName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/white"
-        android:hint="Last Name"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganizerFirstName"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintWidth_percent="0.9" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="#1F1F1F">
 
-    <EditText
-        android:id="@+id/OrganizerEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/white"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganizerLastName"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintWidth_percent="0.9" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-    <EditText
-        android:id="@+id/OrganizerPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="@color/white"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganizerEmail"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintWidth_percent="0.9" />
+            <!-- First Name Input -->
+            <EditText
+                android:id="@+id/OrganizerFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="First Name"
+                android:textColor="#E0E0E0"
+                android:textColorHint="#757575"
+                android:backgroundTint="#E0E0E0"
+                android:inputType="text"/>
 
-    <EditText
-        android:id="@+id/OrganizerPhoneNumber"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/white"
-        android:hint="Phone Number"
-        android:inputType="phone|number"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganizerPassword"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintWidth_percent="0.9" />
+            <!-- Last Name Input -->
+            <EditText
+                android:id="@+id/OrganizerLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last Name"
+                android:layout_marginTop="16dp"
+                android:textColor="#E0E0E0"
+                android:textColorHint="#757575"
+                android:backgroundTint="#E0E0E0"
+                android:inputType="text"/>
 
-    <EditText
-        android:id="@+id/OrganizerAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/white"
-        android:hint="Address"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganizerPhoneNumber"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintWidth_percent="0.9" />
+            <!-- Email Input -->
+            <EditText
+                android:id="@+id/OrganizerEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:layout_marginTop="16dp"
+                android:textColor="#E0E0E0"
+                android:textColorHint="#757575"
+                android:backgroundTint="#E0E0E0"
+                android:inputType="textEmailAddress"/>
 
-    <EditText
-        android:id="@+id/OrganizerOrganisationName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/white"
-        android:hint="Organisation Name"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganizerAddress"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintWidth_percent="0.9" />
+            <!-- Password Input -->
+            <EditText
+                android:id="@+id/OrganizerPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:layout_marginTop="16dp"
+                android:textColor="#E0E0E0"
+                android:textColorHint="#757575"
+                android:backgroundTint="#E0E0E0"
+                android:inputType="textPassword"/>
 
-    <Button
-        android:id="@+id/OrganizerSignUpButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="#FF7043"
-        android:text="Sign Up"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganizerOrganisationName"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintWidth_percent="0.9" />
+            <!-- Phone Number Input -->
+            <EditText
+                android:id="@+id/OrganizerPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number"
+                android:layout_marginTop="16dp"
+                android:textColor="#E0E0E0"
+                android:textColorHint="#757575"
+                android:backgroundTint="#E0E0E0"
+                android:inputType="phone"/>
 
+            <!-- Address Input -->
+            <EditText
+                android:id="@+id/OrganizerAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                android:layout_marginTop="16dp"
+                android:textColor="#E0E0E0"
+                android:textColorHint="#757575"
+                android:backgroundTint="#E0E0E0"
+                android:inputType="textPostalAddress"/>
+
+            <!-- Organisation Name Input -->
+            <EditText
+                android:id="@+id/OrganizerOrganisationName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Organisation Name"
+                android:layout_marginTop="16dp"
+                android:textColor="#E0E0E0"
+                android:textColorHint="#757575"
+                android:backgroundTint="#E0E0E0"
+                android:inputType="text"/>
+
+            <!-- Sign-Up Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/OrganizerSignUpButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign Up"
+                android:textColor="#000000"
+                app:cornerRadius="8dp"
+                android:backgroundTint="#BB86FC"
+                android:layout_marginTop="16dp"/>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Footer Links -->
     <TextView
         android:id="@+id/organizerLoginLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="Already have an account? Log in here"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#757575"
+        app:layout_constraintTop_toBottomOf="@id/inputCard"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganizerSignUpButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:id="@+id/attendeeSignupLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
         android:text="Looking to be an Attendee? Sign up here"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#757575"
+        app:layout_constraintTop_toBottomOf="@id/organizerLoginLink"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/organizerLoginLink" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

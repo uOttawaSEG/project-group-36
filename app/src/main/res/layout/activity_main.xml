@@ -1,118 +1,136 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="#121212">
 
-    <!-- Logo/Image -->
     <ImageView
-        android:id="@+id/appLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="App Logo" />
+        android:id="@+id/logoImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="64dp"/>
 
-    <!-- App Name -->
     <TextView
-        android:id="@+id/appName"
+        android:id="@+id/appNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
         android:text="EAMS"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textSize="48sp"
+        android:textColor="#BB86FC"
+        android:fontFamily="sans-serif-light"
+        app:layout_constraintTop_toBottomOf="@id/logoImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
-    <!-- Tagline -->
     <TextView
-        android:id="@+id/tagline"
-        android:layout_width="wrap_content"
+        android:id="@+id/appDescriptionText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:text="Event &amp; Attendance Management System"
+        android:textSize="18sp"
+        android:textColor="#03DAC6"
+        android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Effortlessly manage your events and attendance."
-        android:textColor="@color/white" />
-
-    <!-- Main Features -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="Create Events"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="Track Attendance"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="Stay Updated"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-
-    <!-- Action Buttons -->
-    <Button
-        android:id="@+id/signUpAttendeeButton"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#FF7043"
-        android:text="Sign Up as Attendee"
-        android:textColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/signUpOrganizer"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/appNameText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"
-        android:backgroundTint="#FFD54F"
-        android:text="Sign Up as Organizer"
-        android:textColor="@android:color/white" />
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"/>
 
-    <!-- Footer Links -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/actionCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/appDescriptionText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="48dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="#1F1F1F">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/cardDescriptionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Join EAMS to streamline your event management and attendance tracking. Choose your role to get started:"
+                android:textSize="16sp"
+                android:textColor="#E0E0E0"
+                android:fontFamily="sans-serif"
+                android:layout_marginBottom="24dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signUpAttendeeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign Up as Attendee"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:padding="12dp"
+                app:cornerRadius="8dp"
+                android:backgroundTint="#BB86FC"
+                android:layout_marginBottom="16dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signUpOrganizerButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign Up as Organizer"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:padding="12dp"
+                app:cornerRadius="8dp"
+                android:backgroundTint="#03DAC6"
+                android:layout_marginBottom="16dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/loginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textColor="#BB86FC"
+                android:textSize="16sp"
+                android:padding="12dp"
+                app:cornerRadius="8dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeColor="#BB86FC"
+                app:strokeWidth="2dp"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
     <TextView
-        android:id="@+id/loginLink"
+        android:id="@+id/termsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:text="Already have an account? Log in here"
-        android:textColor="@color/white" />
+        android:text="By signing up, you agree to our Terms and Privacy Policy"
+        android:textSize="12sp"
+        android:textColor="#757575"
+        android:fontFamily="sans-serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:id="@+id/termsLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:text="Terms of Service | Privacy Policy"
-        android:textColor="@color/white" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
