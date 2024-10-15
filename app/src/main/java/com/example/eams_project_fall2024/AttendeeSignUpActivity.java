@@ -47,6 +47,7 @@ public class AttendeeSignUpActivity extends AppCompatActivity {
         phoneEditText = findViewById(R.id.attendeePhoneNumber);
         addressEditText = findViewById(R.id.attendeeAddress);
         signUpAttendeeButton = findViewById(R.id.attendeeSignUpButton);
+
         signUpAttendeeButton.setOnClickListener(view -> {
             signUpUser();
         });
@@ -113,7 +114,6 @@ public class AttendeeSignUpActivity extends AppCompatActivity {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = auth.getCurrentUser();
                         startActivity(new Intent(AttendeeSignUpActivity.this, AttendeeHomepageActivity.class));
                     }
                 });

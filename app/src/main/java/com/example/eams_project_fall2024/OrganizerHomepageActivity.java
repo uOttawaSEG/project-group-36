@@ -4,13 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.google.firebase.auth.FirebaseAuth;
 
 public class OrganizerHomepageActivity extends AppCompatActivity {
@@ -18,21 +12,14 @@ public class OrganizerHomepageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_organiser_homepage); // Referencing your XML layout
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.linearLayout2), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        setContentView(R.layout.activity_organiser_homepage);
     }
 
     public void logout(View view) {
         // Sign out from Firebase
         FirebaseAuth.getInstance().signOut();
 
-        // Clear any stored data
+        // Clear shared preferences
         SharedPreferences preferences = getSharedPreferences("YourAppPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
@@ -43,6 +30,6 @@ public class OrganizerHomepageActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
-
     }
 }
+
