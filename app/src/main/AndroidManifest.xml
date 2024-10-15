@@ -16,6 +16,10 @@
             android:name=".OrganizerSignUpActivity"
             android:exported="false" />
         <activity
+            android:name=".OrganizerHomepageActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
