@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
+
     private TextView loginLink;
     private Button signUpAttendeeButton;
     private Button signUpOrganizerButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        loginLink = findViewById(R.id.loginLink);
+        loginLink = findViewById(R.id.loginButton);
         signUpAttendeeButton = findViewById(R.id.signUpAttendeeButton);
-        signUpOrganizerButton = findViewById(R.id.signUpOrganizer);
+        signUpOrganizerButton = findViewById(R.id.signUpOrganizerButton);
 
         loginLink.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -37,4 +39,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 }
