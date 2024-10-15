@@ -20,4 +20,10 @@ public class Administrator {
     public String getAdminPassword() {
         return adminPassword;
     }
+
+    // New method to compare passwords
+    public boolean checkPassword(String inputPassword) {
+        return adminPassword.equals(inputPassword);
+    }
 }
+
