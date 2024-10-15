@@ -210,39 +210,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-<<<<<<< HEAD
-        app:layout_constraintTop_toBottomOf="@+id/OrganizerPassword" />
-
-
-    <EditText
-        android:id="@+id/OrganizerAddress"
-        android:layout_width="384dp"
-        android:layout_height="46dp"
-        android:backgroundTint="@color/white"
-        android:hint="Address"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganizerPhoneNumber" />
-
-    <EditText
-        android:id="@+id/OrganizerOrganisationName"
-        android:layout_width="384dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/white"
-        android:hint="Organisation Name"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganizerAddress" />
-=======
         app:layout_constraintTop_toBottomOf="@id/signUpCard" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> f25e7ea065e9d17916cc565521422aef0b0e159a
 
 
 

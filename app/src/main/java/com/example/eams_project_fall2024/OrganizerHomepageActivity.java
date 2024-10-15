@@ -12,17 +12,6 @@ public class OrganizerHomepageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_organiser_homepage);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main1), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-    }
-}
-=======
         setContentView(R.layout.activity_organiser_homepage);
     }
 
@@ -44,4 +33,6 @@ public class OrganizerHomepageActivity extends AppCompatActivity {
     }
 }
 
->>>>>>> f25e7ea065e9d17916cc565521422aef0b0e159a
+
+
+

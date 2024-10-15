@@ -120,10 +120,6 @@ public class OrganizerSignUpActivity extends AppCompatActivity {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-<<<<<<< HEAD
-                        FirebaseUser user = auth.getCurrentUser();
-=======
->>>>>>> f25e7ea065e9d17916cc565521422aef0b0e159a
                         startActivity(new Intent(OrganizerSignUpActivity.this, OrganizerHomepageActivity.class));
                     }
                 });
