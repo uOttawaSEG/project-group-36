@@ -19,10 +19,9 @@ public class OrganizerSignUpActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
 
-    private EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText, phoneEditText, organizationEditText, roleEditText;
+    private EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText, phoneEditText, organizationAddressEditText, organizationNameEditText;
     private Button signUpOrganizerButton;
     private TextView organizerLoginLink;
-    private TextView attendeeSignupLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +33,20 @@ public class OrganizerSignUpActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        organizerLoginLink = findViewById(R.id.organizerLoginLink);
-        attendeeSignupLink = findViewById(R.id.attendeeSignupLink);
+        organizerLoginLink = findViewById(R.id.loginLink);
 
         organizerLoginLink.setOnClickListener(view -> {
             startActivity(new Intent(OrganizerSignUpActivity.this, LoginActivity.class));
         });
 
-        attendeeSignupLink.setOnClickListener(view -> {
-            startActivity(new Intent(OrganizerSignUpActivity.this, AttendeeSignUpActivity.class));
-        });
 
         firstNameEditText = findViewById(R.id.OrganizerFirstName);
         lastNameEditText = findViewById(R.id.OrganizerLastName);
         emailEditText = findViewById(R.id.OrganizerEmail);
         passwordEditText = findViewById(R.id.OrganizerPassword);
         phoneEditText = findViewById(R.id.OrganizerPhoneNumber);
-        organizationEditText = findViewById(R.id.OrganizerOrganisationName);
+        organizationAddressEditText = findViewById(R.id.OrganizationAddress);
+        organizationNameEditText = findViewById(R.id.OrganizationName);
         signUpOrganizerButton = findViewById(R.id.OrganizerSignUpButton);
 
         signUpOrganizerButton.setOnClickListener(view -> {
@@ -64,7 +60,7 @@ public class OrganizerSignUpActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         String phone = phoneEditText.getText().toString().trim();
-        String organization = organizationEditText.getText().toString().trim();
+        String organization = organizationAddressEditText.getText().toString().trim();
 
         if (firstName.isEmpty()) {
             firstNameEditText.setError("First name is required");
@@ -109,10 +105,11 @@ public class OrganizerSignUpActivity extends AppCompatActivity {
         }
 
         if (organization.isEmpty()) {
-            organizationEditText.setError("Organization Name is required");
-            organizationEditText.requestFocus();
+            organizationNameEditText.setError("Organization Name is required");
+            organizationNameEditText.requestFocus();
             return;
         }
+
 
 
         // Firebase Authentication - Create new organizer user

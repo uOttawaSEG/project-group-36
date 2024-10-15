@@ -23,7 +23,6 @@ public class AttendeeSignUpActivity extends AppCompatActivity {
     private EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText, phoneEditText, addressEditText;
     private Button signUpAttendeeButton;
     private TextView attendeeLoginLink;
-    private TextView organizerSignupLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +34,10 @@ public class AttendeeSignUpActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        attendeeLoginLink = findViewById(R.id.attendeeLoginLink);
-        organizerSignupLink = findViewById(R.id.organizerSignupLink);
+        attendeeLoginLink = findViewById(R.id.loginLink);
 
         attendeeLoginLink.setOnClickListener(view -> {
             startActivity(new Intent(AttendeeSignUpActivity.this, LoginActivity.class));
-        });
-
-        organizerSignupLink.setOnClickListener(view -> {
-            startActivity(new Intent(AttendeeSignUpActivity.this, OrganizerSignUpActivity.class));
         });
 
         firstNameEditText = findViewById(R.id.attendeeFirstName);
