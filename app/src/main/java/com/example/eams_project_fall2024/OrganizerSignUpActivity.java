@@ -120,7 +120,6 @@ public class OrganizerSignUpActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = auth.getCurrentUser();
-                        // Navigate to Organizer Home Page after successful sign-up
                         startActivity(new Intent(OrganizerSignUpActivity.this, OrganizerHomepageActivity.class));
                     }
                 });

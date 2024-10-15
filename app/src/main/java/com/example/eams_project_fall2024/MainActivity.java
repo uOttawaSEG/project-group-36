@@ -32,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, AttendeeSignUpActivity.class));
         });
 
-        signUpOrganizerButton.setOnClickListener(view ->{
+        signUpOrganizerButton.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, OrganizerSignUpActivity.class));
         });
+
+
 
     }
 }

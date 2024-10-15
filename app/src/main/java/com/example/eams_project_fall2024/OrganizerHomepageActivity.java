@@ -14,9 +14,8 @@ public class OrganizerHomepageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_organiser_homepage); // Referencing your XML layout
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.linearLayout2), (v, insets) -> {
+        setContentView(R.layout.activity_organiser_homepage);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main1), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
