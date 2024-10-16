@@ -10,22 +10,17 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
-    //Administrator admin = new Administrator();
     private TextView signupLink;
     private EditText loginEmail, loginPassword;
     private FirebaseAuth auth;
     private Button loginButton;
     private FirebaseFirestore db;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +29,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
         loginEmail = findViewById(R.id.loginEmail);
         loginPassword = findViewById(R.id.loginPassword);
         loginButton = findViewById(R.id.loginButton);
         signupLink = findViewById(R.id.signupLink);
-
-        SharedPreferences preferences = getSharedPreferences("YourAppPreferences", MODE_PRIVATE);
-        String userEmail = preferences.getString("UserEmail", null);
-
 
         signupLink.setOnClickListener(view -> {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -50,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(view -> {
             loginUser();
         });
-
     }
 
     private void loginUser() {
@@ -59,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (email.isEmpty()) {
             loginEmail.setError("Email is required");
-            loginPassword.requestFocus();
+            loginEmail.requestFocus();
             return;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             loginEmail.setError("Please enter a valid email");
@@ -76,34 +68,28 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        FirebaseUser user = auth.getCurrentUser();
                         if (user != null) {
-                            String userId = user.getUid();
-
-                            db.collection("users").document(userId).get()
+                            db.collection("users").document(user.getUid()).get()
                                     .addOnSuccessListener(documentSnapshot -> {
                                         if (documentSnapshot.exists()) {
                                             String role = documentSnapshot.getString("role");
-
-                                            if ("attendee".equals(role)) {
-                                                startActivity(new Intent(LoginActivity.this, AttendeeHomepageActivity.class));
-                                            } else if ("organizer".equals(role)) {
+                                            if ("organizer".equals(role)) {
                                                 startActivity(new Intent(LoginActivity.this, OrganizerHomepageActivity.class));
-                                            }
-                                            else{
+                                            } else if ("attendee".equals(role)) {
+                                                startActivity(new Intent(LoginActivity.this, AttendeeHomepageActivity.class));
+                                            } else if ("admin".equals(role)) {
                                                 startActivity(new Intent(LoginActivity.this, AdminHomepageActivity.class));
+                                            } else {
+                                                // Handle unknown role
                                             }
                                         }
                                     });
                         }
+                    } else {
+                        loginPassword.setError("Login failed. Check your credentials");
+                        loginPassword.requestFocus();
                     }
                 });
     }
-
-    // need to add implementation of storing user's email after successful login!
-    // use this code so i can clear the SharedPreference value when user logs out
-    // SharedPreferences preferences = getSharedPreferences("YourAppPreferences", MODE_PRIVATE);
-    // SharedPreferences.Editor editor = preferences.edit();
-    // editor.putString("UserEmail", user.getEmail());
-    // editor.apply();
 }
