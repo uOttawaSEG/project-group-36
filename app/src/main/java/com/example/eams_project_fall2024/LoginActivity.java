@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
     //Administrator admin = new Administrator();
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText loginEmail, loginPassword;
     private FirebaseAuth auth;
     private Button loginButton;
+    private FirebaseFirestore db;
 
 
     @Override
@@ -74,11 +76,26 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(LoginActivity.this, AttendeeHomepageActivity.class));
-                    } else {
-                        loginPassword.setError("Login failed. Check your credentials");
-                        loginEmail.requestFocus();
-                        loginPassword.requestFocus();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user != null) {
+                            String userId = user.getUid();
+
+                            db.collection("users").document(userId).get()
+                                    .addOnSuccessListener(documentSnapshot -> {
+                                        if (documentSnapshot.exists()) {
+                                            String role = documentSnapshot.getString("role");
+
+                                            if ("attendee".equals(role)) {
+                                                startActivity(new Intent(LoginActivity.this, AttendeeHomepageActivity.class));
+                                            } else if ("organizer".equals(role)) {
+                                                startActivity(new Intent(LoginActivity.this, OrganizerHomepageActivity.class));
+                                            }
+                                            else{
+                                                startActivity(new Intent(LoginActivity.this, AdminHomepageActivity.class));
+                                            }
+                                        }
+                                    });
+                        }
                     }
                 });
     }

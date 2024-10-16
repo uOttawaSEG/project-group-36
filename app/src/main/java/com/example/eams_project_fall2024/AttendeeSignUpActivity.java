@@ -129,7 +129,7 @@ public class AttendeeSignUpActivity extends AppCompatActivity {
                         attendee.put("address", address);
 
 
-                        db.collection("attendee").document(userId).set(attendee)
+                        db.collection("users").document(userId).set(attendee)
                                 .addOnSuccessListener(aVoid -> {
                                     startActivity(new Intent(AttendeeSignUpActivity.this, AttendeeHomepageActivity.class));
                                 });

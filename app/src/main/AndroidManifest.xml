@@ -18,6 +18,9 @@
         <activity
             android:name=".OrganizerHomepageActivity"
             android:exported="false" />
+        <activity
+            android:name=".AdminHomepageActivity"
+            android:exported="false" />
 
         <activity
             android:name=".LoginActivity"
