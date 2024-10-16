@@ -15,6 +15,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OrganizerSignUpActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
@@ -62,6 +65,7 @@ public class OrganizerSignUpActivity extends AppCompatActivity {
         String phone = phoneEditText.getText().toString().trim();
         String address = addressEditText.getText().toString().trim();
         String organizationName = organizationNameEditText.getText().toString().trim();
+        String role = "organizer";
 
         if (firstName.isEmpty()) {
             firstNameEditText.setError("First name is required");
@@ -120,7 +124,25 @@ public class OrganizerSignUpActivity extends AppCompatActivity {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(OrganizerSignUpActivity.this, OrganizerHomepageActivity.class));
+                        String userId= FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                        Map<String, Object> organizer = new HashMap<>();
+                        organizer.put("firstName", firstName);
+                        organizer.put("role", role);
+                        organizer.put("lastName", lastName);
+                        organizer.put("email", email);
+                        organizer.put("phone", phone);
+                        organizer.put("address", address);
+
+
+
+                        db.collection("organizer").document(userId).set(organizer)
+                                .addOnSuccessListener(aVoid ->  {
+                                    startActivity(new Intent(OrganizerSignUpActivity.this, OrganizerHomepageActivity.class));
+                                });
+
+
+
                     }
                 });
     }

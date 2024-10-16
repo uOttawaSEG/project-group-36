@@ -15,6 +15,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class AttendeeSignUpActivity extends AppCompatActivity {
     private FirebaseAuth auth;
@@ -60,6 +63,7 @@ public class AttendeeSignUpActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString().trim();
         String phone = phoneEditText.getText().toString().trim();
         String address = addressEditText.getText().toString().trim();
+        String role="attendee";
 
         if (firstName.isEmpty()) {
             firstNameEditText.setError("First name is required");
@@ -114,7 +118,24 @@ public class AttendeeSignUpActivity extends AppCompatActivity {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(AttendeeSignUpActivity.this, AttendeeHomepageActivity.class));
+                        String userId= FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                        Map<String, Object> attendee = new HashMap<>();
+                        attendee.put("firstName", firstName);
+                        attendee.put("role", role);
+                        attendee.put("lastName", lastName);
+                        attendee.put("email", email);
+                        attendee.put("phone", phone);
+                        attendee.put("address", address);
+
+
+                        db.collection("attendee").document(userId).set(attendee)
+                                .addOnSuccessListener(aVoid -> {
+                                    startActivity(new Intent(AttendeeSignUpActivity.this, AttendeeHomepageActivity.class));
+                                });
+
+
+
                     }
                 });
     }
