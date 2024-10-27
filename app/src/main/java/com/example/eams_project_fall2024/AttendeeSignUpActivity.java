@@ -118,26 +118,23 @@ public class AttendeeSignUpActivity extends AppCompatActivity {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        String userId= FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                         Map<String, Object> attendee = new HashMap<>();
                         attendee.put("firstName", firstName);
-                        attendee.put("role", role);
                         attendee.put("lastName", lastName);
                         attendee.put("email", email);
                         attendee.put("phone", phone);
                         attendee.put("address", address);
-
-
+                        attendee.put("role", role);
+                        attendee.put("status", "pending");
                         db.collection("users").document(userId).set(attendee)
                                 .addOnSuccessListener(aVoid -> {
-                                    startActivity(new Intent(AttendeeSignUpActivity.this, AttendeeHomepageActivity.class));
+                                    startActivity(new Intent(AttendeeSignUpActivity.this, LoginActivity.class));
                                 });
-
-
-
                     }
                 });
+
     }
 }
 

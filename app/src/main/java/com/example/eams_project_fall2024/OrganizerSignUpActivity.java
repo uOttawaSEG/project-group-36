@@ -138,7 +138,7 @@ public class OrganizerSignUpActivity extends AppCompatActivity {
 
                         db.collection("users").document(userId).set(organizer)
                                 .addOnSuccessListener(aVoid ->  {
-                                    startActivity(new Intent(OrganizerSignUpActivity.this, OrganizerHomepageActivity.class));
+                                    startActivity(new Intent(OrganizerSignUpActivity.this, LoginActivity.class));
                                 });
 
 
