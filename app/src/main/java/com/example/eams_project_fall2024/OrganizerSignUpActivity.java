@@ -133,8 +133,7 @@ public class OrganizerSignUpActivity extends AppCompatActivity {
                         organizer.put("email", email);
                         organizer.put("phone", phone);
                         organizer.put("address", address);
-
-
+                        organizer.put("status", "pending");
 
                         db.collection("users").document(userId).set(organizer)
                                 .addOnSuccessListener(aVoid ->  {
