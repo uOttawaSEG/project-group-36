@@ -101,7 +101,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (userDocument.exists()) {
                     String userRole = userDocument.getString("role");
                     String registrationStatus = userDocument.getString("status");
-                    processLoginStatus(userRole, registrationStatus, userDocument.getString("email"));
+                    if(userRole.equals("admin")) openHomepage(userRole);
+                    else processLoginStatus(userRole, registrationStatus, userDocument.getString("email"));
                 } else {
                     showToast("ERROR: Document not found.");
                 }
