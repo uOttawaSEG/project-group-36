@@ -53,7 +53,11 @@ public class RejectedRequestsActivity extends AppCompatActivity {
                         }
 
                         for (String email : rejectedUsers) {
+<<<<<<< HEAD
                             View cardView = LayoutInflater.from(this).inflate(R.layout.rejected_request_item, containerLayout, false);
+=======
+                            View cardView = LayoutInflater.from(this).inflate(R.layout.pending_request_item, containerLayout, false);
+>>>>>>> 3f6b0a5a619caa11505585ef24b716a2bb23ac4f
 
                             TextView emailTextView = cardView.findViewById(R.id.emailTextView);
                             emailTextView.setText(email);
