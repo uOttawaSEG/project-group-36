@@ -1,23 +1,17 @@
 package com.example.eams_project_fall2024;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Administrator {
     private String adminUsername;
-    private String adminPassword;
     private FirebaseFirestore db;
 
-    public Administrator(String adminUsername, String adminPassword) {
+    public Administrator(String adminUsername) {
         this.adminUsername = adminUsername;
-        this.adminPassword = adminPassword;
         this.db = FirebaseFirestore.getInstance();
     }
 
@@ -44,6 +38,10 @@ public class Administrator {
     }
 
     public void showRejectedRequests(RejectionCallback callback) {
+        if (callback == null) {
+            throw new IllegalArgumentException("Callback cannot be null");
+        }
+        
         db.collection("userRequests")
                 .whereEqualTo("status", "rejected")
                 .get()
@@ -78,41 +76,5 @@ public class Administrator {
 
     public String getAdminUsername() {
         return adminUsername;
-    }
-
-    public String getAdminPassword() {
-        return adminPassword;
-    }
-
-    public void login(String email, String password, LoginCallback callback) {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = auth.getCurrentUser();
-                        if (user != null) {
-                            if (user.getEmail().equals(adminUsername)) {
-                                callback.onLoginSuccess();
-                            } else {
-                                callback.onLoginFailure("User is not an administrator.");
-                            }
-                        } else {
-                            callback.onLoginFailure("No user found.");
-                        }
-                    } else {
-                        callback.onLoginFailure("Authentication failed: " + task.getException().getMessage());
-                    }
-                });
-    }
-
-    public interface LoginCallback {
-        void onLoginSuccess();
-        void onLoginFailure(String errorMessage);
-    }
-
-    public interface RejectionCallback {
-        void onRejectedRequestFound(String userId, Map<String, Object> requestData);
-        void onNoRejectedRequestsFound();
-        void onError(String errorMessage);
     }
 }
