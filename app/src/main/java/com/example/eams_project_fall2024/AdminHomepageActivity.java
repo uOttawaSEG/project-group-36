@@ -31,11 +31,6 @@ public class AdminHomepageActivity extends AppCompatActivity {
         }
     }
 
-    // Example method to approve user registration
-    public void approveUser(View view) {
-        String userId = "userId123"; // Replace with actual user ID you want to approve
-        administrator.approveUserRegistration(userId);
-    }
 
     public void logout(View view) {
         // Sign out from Firebase
