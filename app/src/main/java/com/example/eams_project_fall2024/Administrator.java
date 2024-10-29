@@ -1,5 +1,7 @@
 package com.example.eams_project_fall2024;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -7,7 +9,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.Map;
 
 public class Administrator extends AppCompatActivity {
-    private String adminUsername;
+   /* private String adminUsername;
     private FirebaseFirestore db;
 
     public Administrator(String adminUsername) {
@@ -76,5 +78,5 @@ public class Administrator extends AppCompatActivity {
 
     public String getAdminUsername() {
         return adminUsername;
-    }
+    }*/
 }

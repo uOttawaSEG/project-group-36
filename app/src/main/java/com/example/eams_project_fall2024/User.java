@@ -17,6 +17,10 @@ public abstract class User {
         this.address = address;
     }
 
+    public String getName() { // Getter method
+        return firstName;
+    }
+
     public void login() {}
 
     public void logout() {}
