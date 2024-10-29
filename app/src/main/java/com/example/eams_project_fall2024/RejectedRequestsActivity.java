@@ -30,15 +30,15 @@ public class RejectedRequestsActivity extends AppCompatActivity {
         LinearLayout containerLayout = findViewById(R.id.containerLayout);
 
         // Fetch pending users from Firestore and populate the container layout
-        fetchPendingUsers(containerLayout);
+        fetchRejectedUsers(containerLayout);
     }
 
-    private void fetchPendingUsers(LinearLayout containerLayout) {
+    private void fetchRejectedUsers(LinearLayout containerLayout) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // Query Firestore for pending users
         db.collection("users")
-                .whereEqualTo("status", "pending")
+                .whereEqualTo("status", "rejected")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -53,17 +53,17 @@ public class RejectedRequestsActivity extends AppCompatActivity {
                         }
 
                         for (String email : rejectedUsers) {
+<<<<<<< HEAD
+                            View cardView = LayoutInflater.from(this).inflate(R.layout.rejected_request_item, containerLayout, false);
+=======
                             View cardView = LayoutInflater.from(this).inflate(R.layout.pending_request_item, containerLayout, false);
+>>>>>>> 3f6b0a5a619caa11505585ef24b716a2bb23ac4f
 
                             TextView emailTextView = cardView.findViewById(R.id.emailTextView);
                             emailTextView.setText(email);
 
                             MaterialButton acceptButton = cardView.findViewById(R.id.acceptButton);
                             acceptButton.setOnClickListener(v -> {
-                            });
-
-                            MaterialButton rejectButton = cardView.findViewById(R.id.rejectButton);
-                            rejectButton.setOnClickListener(v -> {
                             });
 
                             MaterialButton detailsButton = cardView.findViewById(R.id.detailsButton);
