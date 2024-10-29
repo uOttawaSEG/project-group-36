@@ -94,23 +94,30 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void retrieveUserDetails(String userId) {
-        DocumentReference userDocRef = firestoreDb.collection("users").document(userId);
-        userDocRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
-                DocumentSnapshot userDocument = task.getResult();
-                if (userDocument.exists()) {
-                    String userRole = userDocument.getString("role");
-                    String registrationStatus = userDocument.getString("status");
-                    if(userRole.equals("admin")) openHomepage(userRole);
-                    else processLoginStatus(userRole, registrationStatus, userDocument.getString("email"));
+    DocumentReference userDocRef = firestoreDb.collection("users").document(userId);
+    userDocRef.get().addOnCompleteListener(task -> {
+        if (task.isSuccessful() && task.getResult() != null) {
+            DocumentSnapshot userDocument = task.getResult();
+            if (userDocument.exists()) {
+                String userRole = userDocument.getString("role");
+                String registrationStatus = userDocument.getString("status");
+                String adminUsername = userDocument.getString("email"); // Assuming admin username is stored as email
+
+                if ("admin".equals(userRole)) {
+                    // Create an instance of Administrator for admin users
+                    Administrator administrator = new Administrator(adminUsername);
+                    openHomepage(userRole);
                 } else {
-                    showToast("ERROR: Document not found.");
+                    processLoginStatus(userRole, registrationStatus, userDocument.getString("email"));
                 }
             } else {
-                showToast("ERROR: Issue retrieving user data.");
+                showToast("ERROR: Document not found.");
             }
-        });
-    }
+        } else {
+            showToast("ERROR: Issue retrieving user data.");
+        }
+    });
+}
 
     private void processLoginStatus(String role, String status, String email) {
         switch (status) {
