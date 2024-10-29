@@ -65,7 +65,8 @@
                 android:padding="8dp"
                 android:layout_marginStart="8dp"
                 app:cornerRadius="8dp"
-                android:backgroundTint="#FF5722" />
+                android:backgroundTint="#FF5722"
+                android:onClick="onRejectedClick"/>
 
         </LinearLayout>
 

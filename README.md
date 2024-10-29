@@ -5,6 +5,6 @@ Group Members (Name, Student Number):
 4. Anima Mehraj Mehrin, 300278018
 
 Administrator Credentials:
-Email: administrator@gmail.com
+Email: admin@gmail.com
 Password: admin123
    
