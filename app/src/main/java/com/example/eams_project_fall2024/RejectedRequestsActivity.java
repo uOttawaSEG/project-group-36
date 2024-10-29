@@ -42,17 +42,17 @@ public class RejectedRequestsActivity extends AppCompatActivity {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        pendingUsers = new ArrayList<>();
+                        rejectedUsers = new ArrayList<>();
                         QuerySnapshot querySnapshot = task.getResult();
 
                         for (QueryDocumentSnapshot document : querySnapshot) {
                             String email = document.getString("email");
                             if (email != null) {
-                                pendingUsers.add(email);
+                                rejectedUsers.add(email);
                             }
                         }
 
-                        for (String email : pendingUsers) {
+                        for (String email : rejectedUsers) {
                             View cardView = LayoutInflater.from(this).inflate(R.layout.pending_request_item, containerLayout, false);
 
                             TextView emailTextView = cardView.findViewById(R.id.emailTextView);
