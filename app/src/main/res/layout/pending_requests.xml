@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#0A0A0A">
 
-    <!-- Title Text -->
     <TextView
         android:id="@+id/pendingRequestsTitle"
         android:layout_width="wrap_content"
@@ -20,7 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp" />
 
-    <!-- ScrollView containing multiple MaterialCardViews for pending requests -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -32,83 +30,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <!-- LinearLayout to hold each request card -->
         <LinearLayout
+            android:id="@+id/containerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" />
 
-            <!-- Example card for one pending request -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/pendingRequestsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#1A1A1A">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <!-- User Email TextView -->
-                    <TextView
-                        android:id="@+id/emailTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="user@example.com"
-                        android:textColor="#E0E0E0"
-                        android:textSize="16sp"
-                        android:fontFamily="sans-serif-medium"
-                        android:layout_marginBottom="12dp" />
-
-                    <!-- Action Buttons for Accept and Reject -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="end">
-
-                        <!-- Accept Button -->
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/acceptButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Accept"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:padding="8dp"
-                            app:cornerRadius="8dp"
-                            android:backgroundTint="#4CAF50" />
-
-                        <!-- Reject Button -->
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/rejectButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Reject"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:padding="8dp"
-                            android:layout_marginStart="8dp"
-                            app:cornerRadius="8dp"
-                            android:backgroundTint="#FF5722" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Duplicate MaterialCardView for more pending requests if needed -->
-            <!-- Add more cards in this format for each pending request -->
-
-        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 

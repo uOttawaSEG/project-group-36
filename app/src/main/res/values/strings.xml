@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">EAMS_Project_Fall2024</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="Reject">Reject</string>
 </resources>
