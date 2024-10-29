@@ -80,6 +80,17 @@ public class PendingRequestsActivity extends AppCompatActivity {
         }
     }
 
+    public void onRejectedClick(View view) {
+        String documentId = (String) view.getTag();
+
+        if (documentId != null) {
+            System.out.println("Document ID for update: " + documentId);
+            updateUserStatus(documentId, "rejected");
+        } else {
+            System.err.println("Error: Document ID is null.");
+        }
+    }
+
     private void updateUserStatus(String documentId, String newStatus) {
         db.collection("users").document(documentId)
                 .update("status", newStatus)
