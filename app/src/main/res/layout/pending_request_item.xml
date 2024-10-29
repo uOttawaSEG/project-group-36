@@ -38,7 +38,9 @@
                 android:textSize="14sp"
                 android:padding="8dp"
                 app:cornerRadius="8dp"
-                android:backgroundTint="#4CAF50" />
+                android:backgroundTint="#4CAF50"
+                android:onClick="onAcceptClick"/>
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/rejectButton"

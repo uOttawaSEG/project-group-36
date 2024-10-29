@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
             if (userDocument.exists()) {
                 String userRole = userDocument.getString("role");
                 String registrationStatus = userDocument.getString("status");
-                String adminUsername = userDocument.getString("email"); // Assuming admin username is stored as email
+                String adminUsername = userDocument.getString("email");
 
                 if ("admin".equals(userRole)) {
                     openHomepage(userRole);
