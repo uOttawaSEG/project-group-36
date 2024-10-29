@@ -104,8 +104,6 @@ public class LoginActivity extends AppCompatActivity {
                 String adminUsername = userDocument.getString("email"); // Assuming admin username is stored as email
 
                 if ("admin".equals(userRole)) {
-                    // Create an instance of Administrator for admin users
-                    Administrator administrator = new Administrator(adminUsername);
                     openHomepage(userRole);
                 } else {
                     processLoginStatus(userRole, registrationStatus, userDocument.getString("email"));

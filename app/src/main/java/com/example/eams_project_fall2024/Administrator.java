@@ -8,13 +8,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
 
-<<<<<<< HEAD
 public class Administrator extends AppCompatActivity {
-   /* private String adminUsername;
-=======
-public class Administrator {
+    /**
+}
+   private String adminUsername;
+   public class Administrator {
     private String adminUsername;
->>>>>>> 9264a1d3887a2a13863ce327a306566dfb4ba7ff
     private FirebaseFirestore db;
 
     public Administrator(String adminUsername) {
@@ -83,15 +82,7 @@ public class Administrator {
 
     public String getAdminUsername() {
         return adminUsername;
-<<<<<<< HEAD
-    }*/
-=======
-    }
-
-    public interface RejectionCallback {
-        void onRejectedRequestFound(String userId, Map<String, Object> requestData);
-        void onNoRejectedRequestsFound();
-        void onError(String errorMessage);
-    }
->>>>>>> 9264a1d3887a2a13863ce327a306566dfb4ba7ff
+    }*
+     */
 }
+
