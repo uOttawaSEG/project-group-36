@@ -50,7 +50,7 @@ public class PendingRequestsActivity extends AppCompatActivity {
                         }
                     } else {
                         System.out.println("Error fetching documents: " + task.getException());
-                    }
+                            }
                 });
     }
 

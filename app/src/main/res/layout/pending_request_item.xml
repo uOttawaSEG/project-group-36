@@ -39,7 +39,8 @@
                 android:text="Details"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                app:cornerRadius="8dp" />
+                app:cornerRadius="8dp"
+                android:onClick="showUserDetails"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/acceptButton"
