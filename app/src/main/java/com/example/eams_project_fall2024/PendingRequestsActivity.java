@@ -66,6 +66,10 @@ public class PendingRequestsActivity extends AppCompatActivity {
                             rejectButton.setOnClickListener(v -> {
                             });
 
+                            MaterialButton detailsButton = cardView.findViewById(R.id.detailsButton);
+                            detailsButton.setOnClickListener(v -> {
+                            });
+
                             containerLayout.addView(cardView);
                         }
 

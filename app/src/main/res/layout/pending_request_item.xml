@@ -30,6 +30,18 @@
             android:gravity="end">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/detailsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#2049C8"
+                android:padding="8dp"
+                android:text="Details"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                app:cornerRadius="8dp" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/acceptButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,6 +63,7 @@
                 android:layout_marginStart="8dp"
                 app:cornerRadius="8dp"
                 android:backgroundTint="#FF5722" />
+
         </LinearLayout>
 
     </LinearLayout>

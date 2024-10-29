@@ -1,47 +1,83 @@
 package com.example.eams_project_fall2024;
 
 import android.os.Bundle;
-
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.FirebaseFirestore;
-
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RejectedRequestsActivity extends AppCompatActivity {
 
-    private RecyclerView rejectedRequestsRecyclerView;
-    private UserAdapter userAdapter;  // Adapter to display user data
-    private List<User> rejectedUsers;  // Assume User class contains user data
+    private List<String> rejectedUsers;  // List to store pending user emails
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rejected_requests);
+        setContentView(R.layout.rejected_requests); // Updated layout file name
 
-        // Initialize RecyclerView
-        rejectedRequestsRecyclerView = findViewById(R.id.rejectedRequestsRecyclerView);
-        rejectedRequestsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // Set status and navigation bar colors
+        getWindow().setStatusBarColor(android.graphics.Color.rgb(30, 30, 30));
+        getWindow().setNavigationBarColor(android.graphics.Color.rgb(30, 30, 30));
 
-        // Fetch pending users from Firestore and pass to RecyclerView
-        fetchRejectedUsers();
+        // Reference to the container layout
+        LinearLayout containerLayout = findViewById(R.id.containerLayout);
+
+        // Fetch pending users from Firestore and populate the container layout
+        fetchPendingUsers(containerLayout);
     }
 
-    private void fetchRejectedUsers() {
-        // Query Firestore for pending users and populate list
+    private void fetchPendingUsers(LinearLayout containerLayout) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Query Firestore for pending users
         db.collection("users")
-                .whereEqualTo("status", "pending")  // Only fetch pending users
+                .whereEqualTo("status", "pending")
                 .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    rejectedUsers = queryDocumentSnapshots.toObjects(User.class);
-                    userAdapter = new UserAdapter(this, rejectedUsers);
-                    rejectedRequestsRecyclerView.setAdapter(userAdapter);
-                })
-                .addOnFailureListener(e -> {
-                    // Handle errors
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        pendingUsers = new ArrayList<>();
+                        QuerySnapshot querySnapshot = task.getResult();
+
+                        for (QueryDocumentSnapshot document : querySnapshot) {
+                            String email = document.getString("email");
+                            if (email != null) {
+                                pendingUsers.add(email);
+                            }
+                        }
+
+                        for (String email : pendingUsers) {
+                            View cardView = LayoutInflater.from(this).inflate(R.layout.pending_request_item, containerLayout, false);
+
+                            TextView emailTextView = cardView.findViewById(R.id.emailTextView);
+                            emailTextView.setText(email);
+
+                            MaterialButton acceptButton = cardView.findViewById(R.id.acceptButton);
+                            acceptButton.setOnClickListener(v -> {
+                            });
+
+                            MaterialButton rejectButton = cardView.findViewById(R.id.rejectButton);
+                            rejectButton.setOnClickListener(v -> {
+                            });
+
+                            MaterialButton detailsButton = cardView.findViewById(R.id.detailsButton);
+                            detailsButton.setOnClickListener(v -> {
+                            });
+
+                            containerLayout.addView(cardView);
+                        }
+
+                    } else {
+                        System.out.println("Error fetching documents: " + task.getException());
+                    }
                 });
     }
 }
+
+
