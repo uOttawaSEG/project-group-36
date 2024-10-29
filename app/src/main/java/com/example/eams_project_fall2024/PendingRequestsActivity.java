@@ -11,7 +11,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PendingRequestsActivity extends AppCompatActivity {
 
@@ -21,6 +23,7 @@ public class PendingRequestsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pending_requests); // Updated layout file name
+
 
         // Set status and navigation bar colors
         getWindow().setStatusBarColor(android.graphics.Color.rgb(30, 30, 30));
@@ -34,9 +37,9 @@ public class PendingRequestsActivity extends AppCompatActivity {
     }
 
     private void fetchPendingUsers(LinearLayout containerLayout) {
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Query Firestore for pending users
         db.collection("users")
                 .whereEqualTo("status", "pending")
                 .get()
@@ -77,6 +80,26 @@ public class PendingRequestsActivity extends AppCompatActivity {
                         System.out.println("Error fetching documents: " + task.getException());
                     }
                 });
+    }
+        public void onAcceptClick(View view) {
+            String documentId = (String) view.getTag();
+            updateUserStatus(documentId, "accepted");
+        }
+
+        private void updateUserStatus(String documentId, String newStatus) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("status", newStatus);
+
+            db.collection("users").document(documentId)
+                    .update(updates)
+                    .addOnSuccessListener(aVoid -> {
+                        System.out.println("User status updated.");
+                    })
+                    .addOnFailureListener(e -> {
+                        System.err.println("ERROR - updating status");
+                    });
     }
 }
 
