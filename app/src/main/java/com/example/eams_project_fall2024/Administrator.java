@@ -6,7 +6,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
 
-public class Administrator {
+public class Administrator extends AppCompatActivity {
     private String adminUsername;
     private FirebaseFirestore db;
 
