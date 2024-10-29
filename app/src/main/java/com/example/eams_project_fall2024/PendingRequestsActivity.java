@@ -1,29 +1,35 @@
 package com.example.eams_project_fall2024;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PendingRequestsActivity extends AppCompatActivity {
 
-    private RecyclerView pendingRequestsRecyclerView;
+    private TextView pendingRequestsRecyclerView;
     private UserAdapter userAdapter;  // Adapter to display user data
-    private List<User> pendingUsers;  // Assume User class contains user data
+    private List<String> pendingUsers;  // Assume User class contains user data
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pending_requests);
 
+        getWindow().setStatusBarColor(android.graphics.Color.rgb(30, 30, 30));
+        getWindow().setNavigationBarColor(android.graphics.Color.rgb(30, 30, 30));
+
         // Initialize RecyclerView
         pendingRequestsRecyclerView = findViewById(R.id.pendingRequestsRecyclerView);
-        pendingRequestsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Fetch pending users from Firestore and pass to RecyclerView
         fetchPendingUsers();
@@ -35,13 +41,25 @@ public class PendingRequestsActivity extends AppCompatActivity {
         db.collection("users")
                 .whereEqualTo("status", "pending")  // Only fetch pending users
                 .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    pendingUsers = queryDocumentSnapshots.toObjects(User.class);
-                    userAdapter = new UserAdapter(this, pendingUsers);
-                    pendingRequestsRecyclerView.setAdapter(userAdapter);
-                })
-                .addOnFailureListener(e -> {
-                    // Handle errors
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()) {
+                        pendingUsers = new ArrayList<>();
+                        QuerySnapshot querySnapshot = task.getResult();
+
+                        for(QueryDocumentSnapshot document: querySnapshot) {
+                            String email = document.getString("email");
+
+                            pendingUsers.add(email);
+                        }
+                        StringBuilder listOfUsers = new StringBuilder();
+                        for(String userEmail: pendingUsers) {
+                            listOfUsers.append(userEmail).append("\n");
+                        }
+                        pendingRequestsRecyclerView.setText(listOfUsers);
+                        System.out.println("Pending User Emails: " + pendingUsers);
+                    } else {
+                        System.out.println("ERROR - ");
+                    }
                 });
     }
 }
