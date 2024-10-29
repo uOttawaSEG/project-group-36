@@ -30,40 +30,36 @@ public class RejectedRequestsActivity extends AppCompatActivity {
         LinearLayout containerLayout = findViewById(R.id.containerLayout);
 
         // Fetch pending users from Firestore and populate the container layout
-        fetchPendingUsers(containerLayout);
+        fetchRejectedUsers(containerLayout);
     }
 
-    private void fetchPendingUsers(LinearLayout containerLayout) {
+    private void fetchRejectedUsers(LinearLayout containerLayout) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // Query Firestore for pending users
         db.collection("users")
-                .whereEqualTo("status", "pending")
+                .whereEqualTo("status", "rejected")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        pendingUsers = new ArrayList<>();
+                        rejectedUsers = new ArrayList<>();
                         QuerySnapshot querySnapshot = task.getResult();
 
                         for (QueryDocumentSnapshot document : querySnapshot) {
                             String email = document.getString("email");
                             if (email != null) {
-                                pendingUsers.add(email);
+                                rejectedUsers.add(email);
                             }
                         }
 
-                        for (String email : pendingUsers) {
-                            View cardView = LayoutInflater.from(this).inflate(R.layout.pending_request_item, containerLayout, false);
+                        for (String email : rejectedUsers) {
+                            View cardView = LayoutInflater.from(this).inflate(R.layout.rejected_request_item, containerLayout, false);
 
                             TextView emailTextView = cardView.findViewById(R.id.emailTextView);
                             emailTextView.setText(email);
 
                             MaterialButton acceptButton = cardView.findViewById(R.id.acceptButton);
                             acceptButton.setOnClickListener(v -> {
-                            });
-
-                            MaterialButton rejectButton = cardView.findViewById(R.id.rejectButton);
-                            rejectButton.setOnClickListener(v -> {
                             });
 
                             MaterialButton detailsButton = cardView.findViewById(R.id.detailsButton);
