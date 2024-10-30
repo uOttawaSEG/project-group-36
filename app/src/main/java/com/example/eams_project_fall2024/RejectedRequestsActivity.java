@@ -63,6 +63,14 @@ public class RejectedRequestsActivity extends AppCompatActivity {
         MaterialButton acceptButton = cardView.findViewById(R.id.acceptButton);
         acceptButton.setTag(documentId); // Store document ID as tag for dynamic access
 
+        MaterialButton detailsButton = cardView.findViewById(R.id.detailsButton);
+        detailsButton.setTag(documentId);
+        detailsButton.setOnClickListener(view -> {
+            // Create a dummy user or a specific subclass of User to fetch details
+            //User user = new User() {};  // Replace this with a concrete subclass if applicable
+            User.fetchAndDisplayUserDetails(view.getContext(), documentId);
+        });
+
         containerLayout.addView(cardView);
     }
 
@@ -83,7 +91,17 @@ public class RejectedRequestsActivity extends AppCompatActivity {
                 .update("status", newStatus)
                 .addOnSuccessListener(aVoid -> {
                     System.out.println("User status updated to " + newStatus);
+
+                    // Clear the current list
+                    containerLayout.removeAllViews();
+
+                    // Reload the pending users list
+                    fetchRejectedUsers();
+
                 })
+
+
+
                 .addOnFailureListener(e -> {
                     System.err.println("Error updating status: " + e.getMessage());
                 });

@@ -66,6 +66,14 @@ public class PendingRequestsActivity extends AppCompatActivity {
         MaterialButton rejectButton = cardView.findViewById(R.id.rejectButton);
         rejectButton.setOnClickListener(v -> updateUserStatus(documentId, "rejected"));
 
+        MaterialButton detailsButton = cardView.findViewById(R.id.detailsButton);
+        detailsButton.setTag(documentId);
+        detailsButton.setOnClickListener(view -> {
+            // Create a dummy user or a specific subclass of User to fetch details
+            //User user = new User() {};  // Replace this with a concrete subclass if applicable
+            User.fetchAndDisplayUserDetails(view.getContext(), documentId);
+        });
+
         containerLayout.addView(cardView);
     }
 
@@ -96,12 +104,20 @@ public class PendingRequestsActivity extends AppCompatActivity {
                 .update("status", newStatus)
                 .addOnSuccessListener(aVoid -> {
                     System.out.println("User status updated to " + newStatus);
+
+                    // Clear the current list
+                    containerLayout.removeAllViews();
+
+                    // Reload the pending users list
+                    fetchPendingUsers();
                 })
                 .addOnFailureListener(e -> {
                     System.err.println("Error updating status: " + e.getMessage());
                 });
     }
+
 }
+
 
 
 
