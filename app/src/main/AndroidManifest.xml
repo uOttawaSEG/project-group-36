@@ -20,6 +20,8 @@
         <activity android:name=".LoginActivity" android:exported="false" />
         <activity android:name=".AttendeeHomepageActivity" android:exported="false" />
         <activity android:name=".AttendeeSignUpActivity" android:exported="false" />
+        <activity android:name=".UpcomingEventsActivity" />
+        <activity android:name=".PastEventsActivity" />
 
         <!-- Main Activity -->
         <activity android:name=".MainActivity" android:exported="true">
