@@ -31,4 +31,3 @@ public class PastEventsActivity extends AppCompatActivity {
         containerLayout.addView(eventView);
     }
 }
-

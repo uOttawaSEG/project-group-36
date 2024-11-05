@@ -1,15 +1,29 @@
 package com.example.eams_project_fall2024;
 
-public class Attendee extends User {
-    public Attendee(String firstName, String lastName, String email, String password, String phoneNumber, String address) {
-        super(firstName, lastName, email, password, phoneNumber, address);
+public class Attendee {
+    private String name;
+    private boolean isApproved;
+
+    public Attendee() {} // Default constructor for Firebase
+
+    public Attendee(String name, boolean isApproved) {
+        this.name = name;
+        this.isApproved = isApproved;
     }
 
-    public void requestEventRegistration() {}
+    public String getName() {
+        return name;
+    }
 
-    public void cancelEventRegistration() {}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void viewRegisteredEvents() {}
+    public boolean isApproved() {
+        return isApproved;
+    }
 
-    public void searchAvailableEvents() {}
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
 }
