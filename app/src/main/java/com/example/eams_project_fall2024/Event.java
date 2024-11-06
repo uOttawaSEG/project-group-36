@@ -6,12 +6,10 @@ public class Event {
     private String eventId;
     private String eventName;
     private String eventDate;
-    private List<Attendee> attendees; // Assuming attendees is a list
+    private List<Attendee> attendees;
 
-    // Default constructor required for Firebase deserialization
     public Event() {}
 
-    // Constructor with parameters
     public Event(String eventId, String eventName, String eventDate, List<Attendee> attendees) {
         this.eventId = eventId;
         this.eventName = eventName;
@@ -19,7 +17,6 @@ public class Event {
         this.attendees = attendees;
     }
 
-    // Getters and Setters
     public String getEventId() {
         return eventId;
     }
@@ -52,12 +49,4 @@ public class Event {
         this.attendees = attendees;
     }
 
-    // Method to approve all attendees
-    public void approveAllAttendees() {
-        if (attendees != null) {
-            for (Attendee attendee : attendees) {
-                attendee.setApproved(true); // Assuming Attendee class has an isApproved field
-            }
-        }
-    }
 }
