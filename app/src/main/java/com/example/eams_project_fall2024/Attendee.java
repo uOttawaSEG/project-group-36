@@ -1,15 +1,23 @@
 package com.example.eams_project_fall2024;
 
-public class Attendee extends User {
-    public Attendee(String firstName, String lastName, String email, String password, String phoneNumber, String address) {
-        super(firstName, lastName, email, password, phoneNumber, address);
+public class Attendee {
+    private String name;
+    private String status;
+
+    public Attendee(String name) {
+        this.name = name;
+        this.status = "pending"; // default status
     }
 
-    public void requestEventRegistration() {}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-    public void cancelEventRegistration() {}
+    public String getName() {
+        return name;
+    }
 
-    public void viewRegisteredEvents() {}
-
-    public void searchAvailableEvents() {}
+    public String getStatus() {
+        return status;
+    }
 }

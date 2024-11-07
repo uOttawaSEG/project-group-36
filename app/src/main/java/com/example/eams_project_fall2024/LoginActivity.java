@@ -57,10 +57,8 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
 
-        // Validate fields before attempting login
         if (!areFieldsValid(email, password)) return;
 
-        // Attempt Firebase authentication
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -73,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
 
     private boolean areFieldsValid(String email, String password) {
         if (email.isEmpty()) {
