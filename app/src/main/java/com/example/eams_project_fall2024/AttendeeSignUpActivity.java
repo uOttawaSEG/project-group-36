@@ -12,45 +12,45 @@ import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class AttendeeSignUpActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
 
-    private EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText, phoneEditText, addressEditText;
+    private EditText firstNameEditText, lastNameEditText, emailEditText, phoneEditText;
+    private EditText passwordEditText, addressEditText;
     private Button signUpAttendeeButton;
     private TextView attendeeLoginLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_attendee_sign_up);
 
         FirebaseApp.initializeApp(this);
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        attendeeLoginLink = findViewById(R.id.loginLink);
+        // Initialize UI components
+        firstNameEditText = findViewById(R.id.firstNameInput);
+        lastNameEditText = findViewById(R.id.lastNameInput);
+        emailEditText = findViewById(R.id.emailInput);
+        phoneEditText = findViewById(R.id.phoneInput);
+        passwordEditText = findViewById(R.id.passwordInput); // Added
+        addressEditText = findViewById(R.id.addressInput); // Added
+        signUpAttendeeButton = findViewById(R.id.submitButton);
+        attendeeLoginLink = findViewById(R.id.loginLink); // Added
 
+        // Set up login link click listener
         attendeeLoginLink.setOnClickListener(view -> {
             startActivity(new Intent(AttendeeSignUpActivity.this, LoginActivity.class));
         });
 
-        firstNameEditText = findViewById(R.id.attendeeFirstName);
-        lastNameEditText = findViewById(R.id.attendeeLastName);
-        emailEditText = findViewById(R.id.attendeeEmail);
-        passwordEditText = findViewById(R.id.attendeePassword);
-        phoneEditText = findViewById(R.id.attendeePhoneNumber);
-        addressEditText = findViewById(R.id.attendeeAddress);
-        signUpAttendeeButton = findViewById(R.id.attendeeSignUpButton);
-
+        // Set up sign-up button click listener
         signUpAttendeeButton.setOnClickListener(view -> {
             signUpUser();
         });
@@ -63,8 +63,9 @@ public class AttendeeSignUpActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString().trim();
         String phone = phoneEditText.getText().toString().trim();
         String address = addressEditText.getText().toString().trim();
-        String role="attendee";
+        String role = "attendee";
 
+        // Validation checks
         if (firstName.isEmpty()) {
             firstNameEditText.setError("First name is required");
             firstNameEditText.requestFocus();
@@ -113,13 +114,13 @@ public class AttendeeSignUpActivity extends AppCompatActivity {
             return;
         }
 
-
-
+        // Create user in Firebase
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+                        // Prepare data for Firestore
                         Map<String, Object> attendee = new HashMap<>();
                         attendee.put("firstName", firstName);
                         attendee.put("lastName", lastName);
@@ -128,15 +129,13 @@ public class AttendeeSignUpActivity extends AppCompatActivity {
                         attendee.put("address", address);
                         attendee.put("role", role);
                         attendee.put("status", "pending");
+
+                        // Save data to Firestore
                         db.collection("users").document(userId).set(attendee)
                                 .addOnSuccessListener(aVoid -> {
                                     startActivity(new Intent(AttendeeSignUpActivity.this, LoginActivity.class));
                                 });
                     }
                 });
-
     }
 }
-
-
-

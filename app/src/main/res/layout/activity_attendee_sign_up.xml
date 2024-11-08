@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,8 +6,7 @@
     android:background="#1E1E1E"
     android:padding="24dp">
 
-    <!-- Tagline -->
-
+    <!-- App Name Title -->
     <TextView
         android:id="@+id/appName"
         android:layout_width="wrap_content"
@@ -19,10 +17,11 @@
         android:textColor="#FFFFFF"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Tagline -->
     <TextView
         android:id="@+id/tagline"
         android:layout_width="wrap_content"
@@ -34,9 +33,9 @@
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/appName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Input Fields -->
+    <!-- Card View for Input Fields -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/signUpCard"
         android:layout_width="0dp"
@@ -64,7 +63,7 @@
                 app:hintTextColor="#B0BEC5">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/attendeeFirstName"
+                    android:id="@+id/firstNameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -82,7 +81,7 @@
                 app:hintTextColor="#B0BEC5">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/attendeeLastName"
+                    android:id="@+id/lastNameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -100,7 +99,7 @@
                 app:hintTextColor="#B0BEC5">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/attendeeEmail"
+                    android:id="@+id/emailInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
@@ -118,10 +117,28 @@
                 app:hintTextColor="#B0BEC5">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/attendeePhoneNumber"
+                    android:id="@+id/phoneInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
+                    android:textColor="#FFFFFF" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Password Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Password"
+                app:boxStrokeColor="#4CAF50"
+                app:hintTextColor="#B0BEC5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
                     android:textColor="#FFFFFF" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,36 +153,16 @@
                 app:hintTextColor="#B0BEC5">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/attendeeAddress"
+                    android:id="@+id/addressInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPostalAddress"
                     android:textColor="#FFFFFF" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Password Input -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Password"
-                app:boxStrokeColor="#4CAF50"
-                app:hintTextColor="#B0BEC5"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="#B0BEC5">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/attendeePassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:textColor="#FFFFFF" />
-            </com.google.android.material.textfield.TextInputLayout>
-
             <!-- Sign-Up Button -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/attendeeSignUpButton"
+                android:id="@+id/submitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -176,26 +173,22 @@
                 android:textColor="#FFFFFF"
                 app:cornerRadius="8dp" />
 
+            <!-- Login Link -->
+            <TextView
+                android:id="@+id/loginLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:text="Already have an account? Log in"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:clickable="true"
+                android:padding="12dp" />
+
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Footer Links -->
-    <TextView
-        android:id="@+id/loginLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Already have an account? Log in here"
-        android:textColor="#B0BEC5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signUpCard" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-

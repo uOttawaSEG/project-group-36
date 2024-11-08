@@ -1,53 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#0A0A0A"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:background="#1E1E1E">
 
-    <!-- ScrollView containing the signup list -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleSignupList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:layout_gravity="center" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <!-- Title for Signup List -->
-            <TextView
-                android:id="@+id/titleSignupList"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Signup List"
-                android:textSize="24sp"
-                android:textColor="#FFFFFF"
-                android:fontFamily="sans-serif-medium"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Attendee List Layout -->
-            <LinearLayout
-                android:id="@+id/attendeeListLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
-    <!-- Accept All Button at the bottom -->
-    <Button
-        android:id="@+id/acceptAllButton"
+    <!-- First Name Input -->
+    <EditText
+        android:id="@+id/firstNameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Accept All"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+        android:autofillHints="givenName"
         android:textColor="#FFFFFF"
-        android:background="#1C4E1C"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp" />
+        android:textColorHint="#B0BEC5"
+        android:layout_marginTop="16dp"
+        android:minHeight="48dp" />
 
+    <!-- Last Name Input -->
+    <EditText
+        android:id="@+id/lastNameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Last Name"
+        android:inputType="textPersonName"
+        android:autofillHints="familyName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#B0BEC5"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp" />
+
+    <!-- Email Input -->
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:autofillHints="emailAddress"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#B0BEC5"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp" />
+
+    <!-- Phone Number Input -->
+    <EditText
+        android:id="@+id/phoneInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone Number"
+        android:inputType="phone"
+        android:autofillHints="phoneNumber"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#B0BEC5"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp" />
+
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:text="Sign Up"
+        android:background="#214523"
+        android:textColor="#FFFFFF"
+        android:contentDescription="Sign up button"
+        android:minHeight="48dp"
+        />
+
+    <!-- Attendee List Layout -->
+    <LinearLayout
+        android:id="@+id/attendeeListLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="24dp" />
 </LinearLayout>
