@@ -198,14 +198,10 @@ public class CreateEventActivity extends AppCompatActivity {
         event.put("endTime", endTime.getTime());
         event.put("address", address);
         event.put("isAutoApproval", isAutoApproval);
-        event.put("createdAt", new Date());
+        event.put("createdAt", new Date()); // The date when the event was created
 
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            event.put("organizerId", FirebaseAuth.getInstance().getCurrentUser().getUid());
-        } else {
-            Toast.makeText(this, "User not authenticated.", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        // Store startTime as a separate field for easy comparison
+        event.put("eventDate", startTime.getTime());
 
         db.collection("events")
                 .add(event)

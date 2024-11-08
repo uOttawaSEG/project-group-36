@@ -21,7 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp" />
 
-
     <!-- Scrollable Container for Dynamic Event Items -->
     <ScrollView
         android:layout_width="0dp"
@@ -29,6 +28,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:contentDescription="List of upcoming events"
         app:layout_constraintTop_toBottomOf="@id/titleUpcomingEvents"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-
     </ScrollView>
+    <!-- Accept All Button at the Bottom -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/acceptAllButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accept All"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#4CAF50"
+        android:fontFamily="sans-serif-medium"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

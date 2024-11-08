@@ -57,6 +57,18 @@
                 android:backgroundTint="#FF9800"
                 app:cornerRadius="8dp" />
 
+            <!-- Accept Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/acceptButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Accept"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:backgroundTint="#4CAF50"
+                app:cornerRadius="8dp" />
+
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
