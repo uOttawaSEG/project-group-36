@@ -52,7 +52,7 @@ public class PastEventsActivity extends AppCompatActivity {
 
     private void addEventItem(String eventName, String eventId) {
         // Inflate the event item layout (e.g., event_item.xml) if you are using a custom layout
-        View eventView = LayoutInflater.from(this).inflate(R.layout.event_item, containerLayout, false);
+        View eventView = LayoutInflater.from(this).inflate(R.layout.activity_upcoming_events_attendeeside_item, containerLayout, false);
 
         // Find the TextView within the inflated layout
         TextView eventNameTextView = eventView.findViewById(R.id.eventName);

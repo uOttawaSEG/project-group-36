@@ -16,11 +16,24 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class AttendeeHomepageActivity extends AppCompatActivity {
 
+    private Button viewUpcomingEventsButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_attendee_homepage);
+
+        viewUpcomingEventsButton = findViewById(R.id.viewUpcomingEventsButton);
+
+        viewUpcomingEventsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AttendeeHomepageActivity.this, UpcomingEventsActivityForAttendee.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void logout(View view) {
