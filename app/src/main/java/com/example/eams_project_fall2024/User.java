@@ -58,11 +58,11 @@ public abstract class User {
                                 (role.equals("organizer") ? "Organization: " + organizationName + "\n" : "") +
                                 "Role: " + role;
 
-                        new AlertDialog.Builder(context)
-                                .setTitle("User Details")
-                                .setMessage(message)
-                                .setPositiveButton("Close", (dialog, which) -> dialog.dismiss())
-                                .show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("User Details");
+                        builder.setMessage(message);
+                        builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
+                        builder.show();
                     } else {
                         new AlertDialog.Builder(context)
                                 .setTitle("User Not Found")

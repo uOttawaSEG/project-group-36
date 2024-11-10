@@ -1,5 +1,6 @@
 package com.example.eams_project_fall2024;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +15,9 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class PastEventsActivity extends AppCompatActivity {
     private LinearLayout containerLayout;
@@ -52,7 +55,7 @@ public class PastEventsActivity extends AppCompatActivity {
 
     private void addEventItem(String eventName, String eventId) {
         // Inflate the event item layout (e.g., event_item.xml) if you are using a custom layout
-        View eventView = LayoutInflater.from(this).inflate(R.layout.activity_upcoming_events_attendeeside_item, containerLayout, false);
+        View eventView = LayoutInflater.from(this).inflate(R.layout.activity_past_events_item, containerLayout, false);
 
         // Find the TextView within the inflated layout
         TextView eventNameTextView = eventView.findViewById(R.id.eventName);
@@ -61,19 +64,51 @@ public class PastEventsActivity extends AppCompatActivity {
 
         // Set up the details button (if any) within the inflated layout
         MaterialButton detailsButton = eventView.findViewById(R.id.detailsButton);
-        detailsButton.setOnClickListener(v -> {
-            // Handle details action, e.g., open a details activity or dialog
-        });
+        detailsButton.setOnClickListener(v -> fetchAndDisplayEventDetails(eventId));
 
-        // Set up the signup list button
-        MaterialButton signupListButton = eventView.findViewById(R.id.signupListButton);
-        signupListButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SignupListActivity.class);
-            intent.putExtra("eventId", eventId);
-            startActivity(intent);
-        });
+
+
 
         // Add the event view to the container layout in the ScrollView
         containerLayout.addView(eventView);
     }
+
+    private void fetchAndDisplayEventDetails(String eventId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("events").document(eventId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String title = documentSnapshot.getString("title");
+                        String description = documentSnapshot.getString("description");
+                        Date eventDate = documentSnapshot.getDate("eventDate");
+                        String address = documentSnapshot.getString("address");
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, yyyy 'at' h:mm a", Locale.getDefault());
+                        String dateStr = (eventDate != null) ? dateFormat.format(eventDate) : "No date provided";
+
+                        String message = "Title: " + title + "\n" +
+                                "Description: " + description + "\n" +
+                                "Date: " + dateStr + "\n" +
+                                "Location: " + address;
+
+                        new AlertDialog.Builder(PastEventsActivity.this)
+                                .setTitle("Event Details")
+                                .setMessage(message)
+                                .setPositiveButton("Close", (dialog, which) -> dialog.dismiss())
+                                .show();
+                    } else {
+                        new AlertDialog.Builder(PastEventsActivity.this)
+                                .setTitle("Event Not Found")
+                                .setMessage("Details for the selected event could not be found.")
+                                .setPositiveButton("Close", (dialog, which) -> dialog.dismiss())
+                                .show();
+                    }
+                })
+                .addOnFailureListener(e -> new AlertDialog.Builder(PastEventsActivity.this)
+                        .setTitle("Error")
+                        .setMessage("Failed to retrieve event details: " + e.getMessage())
+                        .setPositiveButton("Close", (dialog, which) -> dialog.dismiss())
+                        .show());
+    }
+
 }

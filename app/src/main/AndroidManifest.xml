@@ -16,8 +16,9 @@
             android:name=".UpcomingEventsActivityForAttendee"
             android:exported="false" />
         <activity
-            android:name=".SignupListActivity"
+            android:name=".UpcomingEventsActivityForOrganizer"
             android:exported="false" />
+
         <activity
             android:name=".PastEventsActivity"
             android:exported="false" />

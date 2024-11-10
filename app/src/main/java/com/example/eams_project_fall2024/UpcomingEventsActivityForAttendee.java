@@ -135,17 +135,4 @@ public class UpcomingEventsActivityForAttendee  extends AppCompatActivity {
                         .show());
     }
 
-
-
-
-    private void acceptEvent(String eventId) {
-        // Logic to mark the event as accepted in the database
-        db.collection("events").document(eventId).update("status", "accepted")
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Event " + eventId + " accepted!", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Failed to accept event " + eventId, Toast.LENGTH_SHORT).show();
-                });
-    }
 }

@@ -34,7 +34,7 @@ public class OrganizerHomepageActivity extends AppCompatActivity {
         viewUpcomingEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OrganizerHomepageActivity.this, UpcomingEventsActivityForAttendee.class);
+                Intent intent = new Intent(OrganizerHomepageActivity.this, UpcomingEventsActivityForOrganizer.class);
                 startActivity(intent);
             }
         });

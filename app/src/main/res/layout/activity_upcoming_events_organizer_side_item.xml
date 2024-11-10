@@ -34,6 +34,8 @@
             android:gravity="end">
 
             <!-- Details Button -->
+
+            <!-- Signup List Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/detailsButton"
                 android:layout_width="wrap_content"
@@ -45,9 +47,8 @@
                 android:textSize="14sp"
                 app:cornerRadius="8dp" />
 
-            <!-- Signup List Button -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/detailsButton2"
+                android:id="@+id/approvedListButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -59,7 +60,7 @@
                 app:cornerRadius="8dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/signupListButton"
+                android:id="@+id/pendingListButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
