@@ -68,8 +68,12 @@ public class PastEventsActivity extends AppCompatActivity {
         MaterialButton detailsButton = eventView.findViewById(R.id.detailsButton);
         detailsButton.setOnClickListener(v -> fetchAndDisplayEventDetails(eventId));
 
-
-
+        MaterialButton previousListButton = eventView.findViewById(R.id.participantListButton);
+        previousListButton.setOnClickListener(v -> {
+            Intent intent = new Intent(PastEventsActivity.this, PastParticipantList.class);
+            intent.putExtra("eventId", eventId);  // Pass the event ID to the activity
+            startActivity(intent);
+        });
 
         // Add the event view to the container layout in the ScrollView
         containerLayout.addView(eventView);
