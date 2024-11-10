@@ -80,6 +80,12 @@ public class PendingParticipantActivity extends AppCompatActivity {
         TextView nameTextView = cardView.findViewById(R.id.emailTextView);
         nameTextView.setText(name);
 
+        MaterialButton detailsButton = cardView.findViewById(R.id.detailsButton);
+        detailsButton.setOnClickListener(v -> {
+            // Assuming the User class has a method to fetch and display user details
+            User.fetchAndDisplayUserDetails(PendingParticipantActivity.this, userId);
+        });
+
         MaterialButton acceptButton = cardView.findViewById(R.id.acceptButton);
         acceptButton.setOnClickListener(v -> updateParticipantStatus(userId, "approved"));
 
