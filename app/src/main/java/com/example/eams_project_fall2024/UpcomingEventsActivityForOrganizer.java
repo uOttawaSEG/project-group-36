@@ -72,12 +72,29 @@ public class UpcomingEventsActivityForOrganizer extends AppCompatActivity {
         MaterialButton detailsButton = eventView.findViewById(R.id.detailsButton);
         detailsButton.setOnClickListener(v -> fetchAndDisplayEventDetails(eventId));
 
-        MaterialButton pendingListButton = eventView.findViewById(R.id.pendingListButton); // Assuming this is the button ID in your XML
+        MaterialButton pendingListButton = eventView.findViewById(R.id.pendingListButton);
         pendingListButton.setOnClickListener(v -> {
-            Intent intent = new Intent(UpcomingEventsActivityForOrganizer.this, PendingParticipantActivity.class);
-            intent.putExtra("eventId", eventId);  // Pass the event ID to the pending participants activity
-            startActivity(intent);
+            // First, fetch the event details to check if it's set to auto-approval
+            db.collection("events").document(eventId).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            Boolean isAutoApproval = documentSnapshot.getBoolean("isAutoApproval");
+                            if (isAutoApproval != null && isAutoApproval) {
+                                // If auto-approval is true, show a toast message and do not navigate
+                                Toast.makeText(UpcomingEventsActivityForOrganizer.this, "Event is set to auto approval. There is no pending list.", Toast.LENGTH_LONG).show();
+                            } else {
+                                // Otherwise, navigate to the PendingParticipantActivity
+                                Intent intent = new Intent(UpcomingEventsActivityForOrganizer.this, PendingParticipantActivity.class);
+                                intent.putExtra("eventId", eventId);
+                                startActivity(intent);
+                            }
+                        } else {
+                            Toast.makeText(UpcomingEventsActivityForOrganizer.this, "Event details not found.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(UpcomingEventsActivityForOrganizer.this, "Failed to load event details: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         });
+
 
         MaterialButton deleteButton = eventView.findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(v -> confirmAndDeleteEvent(eventId));
