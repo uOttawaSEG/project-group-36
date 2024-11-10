@@ -73,6 +73,13 @@ public class UpcomingEventsActivityForOrganizer extends AppCompatActivity {
         MaterialButton detailsButton = eventView.findViewById(R.id.detailsButton);
         detailsButton.setOnClickListener(v -> fetchAndDisplayEventDetails(eventId));
 
+        MaterialButton pendingButton = eventView.findViewById(R.id.pendingListButton);
+        pendingButton.setOnClickListener(v -> {
+            Intent intent = new Intent(UpcomingEventsActivityForOrganizer.this, PendingParticipantActivity.class);
+            intent.putExtra("eventId", eventId);  // Pass the event ID to the pending participants activity
+            startActivity(intent);
+        });
+
         upcomingContainerLayout.addView(eventView);
 
 

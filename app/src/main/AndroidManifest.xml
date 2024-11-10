@@ -28,6 +28,8 @@
         <activity
             android:name=".OrganizerSignUpActivity"
             android:exported="false" />
+        <activity android:name=".PendingParticipantActivity"
+            android:exported="false" />
         <activity
             android:name=".OrganizerHomepageActivity"
             android:exported="false" />
