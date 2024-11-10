@@ -30,6 +30,8 @@
             android:exported="false" />
         <activity android:name=".PendingParticipantActivity"
             android:exported="false" />
+        <activity android:name=".ApprovedParticipantActivity"
+            android:exported="false"/>
         <activity
             android:name=".OrganizerHomepageActivity"
             android:exported="false" />

@@ -1,5 +1,6 @@
 package com.example.eams_project_fall2024;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,8 +58,23 @@ public class UpcomingEventsActivityForOrganizer extends AppCompatActivity {
         TextView eventNameTextView = eventView.findViewById(R.id.eventName);
         eventNameTextView.setText(eventName);
 
+        MaterialButton approvedButton = eventView.findViewById(R.id.approvedListButton);
+        approvedButton.setOnClickListener(v -> {
+            Intent intent = new Intent(UpcomingEventsActivityForOrganizer.this, ApprovedParticipantActivity.class);
+            intent.putExtra("eventId", eventId);
+            startActivity(intent);
+        });
+
+
         MaterialButton detailsButton = eventView.findViewById(R.id.detailsButton);
         detailsButton.setOnClickListener(v -> fetchAndDisplayEventDetails(eventId));
+
+        MaterialButton pendingListButton = eventView.findViewById(R.id.pendingListButton); // Assuming this is the button ID in your XML
+        pendingListButton.setOnClickListener(v -> {
+            Intent intent = new Intent(UpcomingEventsActivityForOrganizer.this, PendingParticipantActivity.class);
+            intent.putExtra("eventId", eventId);  // Pass the event ID to the pending participants activity
+            startActivity(intent);
+        });
 
         MaterialButton deleteButton = eventView.findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(v -> confirmAndDeleteEvent(eventId));
