@@ -71,5 +71,12 @@
                 app:cornerRadius="8dp" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#B41717"
+            android:text="Delete" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

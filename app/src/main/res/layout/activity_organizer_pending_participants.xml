@@ -22,10 +22,11 @@
         android:id="@+id/btnAcceptAll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Accept All"
+        android:layout_marginBottom="8dp"
         android:background="#9D1515"
-        android:textColor="@android:color/white"
-        android:layout_marginBottom="8dp"/>
+        android:backgroundTint="#127B16"
+        android:text="Accept All"
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/btnRejectAll"
