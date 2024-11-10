@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,9 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Apply background color adjustments to system bars
-        getWindow().setStatusBarColor(android.graphics.Color.rgb(30, 30, 30));
-        getWindow().setNavigationBarColor(android.graphics.Color.rgb(30, 30, 30));
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
         // Initialize Firebase components
