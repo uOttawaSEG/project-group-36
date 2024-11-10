@@ -77,7 +77,39 @@ public class UpcomingEventsActivityForAttendee extends AppCompatActivity {
                     .addOnFailureListener(e -> Toast.makeText(this, "Failed to retrieve event details: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         });
 
+        MaterialButton detailsButton = eventView.findViewById(R.id.detailsButton);
+        detailsButton.setOnClickListener(v -> fetchAndDisplayEventDetails(eventId));
+
         upcomingContainerLayout.addView(eventView);
+    }
+
+    private void fetchAndDisplayEventDetails(String eventId) {
+        db.collection("events").document(eventId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String title = documentSnapshot.getString("title");
+                        String description = documentSnapshot.getString("description");
+                        Date eventDate = documentSnapshot.getDate("eventDate");
+                        String address = documentSnapshot.getString("address");
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, yyyy 'at' h:mm a", Locale.getDefault());
+                        String dateStr = (eventDate != null) ? dateFormat.format(eventDate) : "No date provided";
+
+                        String message = "Title: " + title + "\n" +
+                                "Description: " + description + "\n" +
+                                "Date: " + dateStr + "\n" +
+                                "Location: " + address;
+
+                        new androidx.appcompat.app.AlertDialog.Builder(this)
+                                .setTitle("Event Details")
+                                .setMessage(message)
+                                .setPositiveButton("Close", (dialog, which) -> dialog.dismiss())
+                                .show();
+                    } else {
+                        Toast.makeText(this, "Event not found.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> Toast.makeText(this, "Failed to retrieve event details: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     private void registerAttendee(String eventId, String status, String message) {
