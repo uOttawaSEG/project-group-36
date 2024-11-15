@@ -18,6 +18,9 @@
         <activity
             android:name=".UpcomingEventsActivityForOrganizer"
             android:exported="false" />
+        <activity
+            android:name=".FilteredUpcomingEventsActivityForAttendee"
+            android:exported="false" />
         <activity android:name=".PastParticipantList"
             android:exported="false" />
         <activity

@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class AttendeeHomepageActivity extends AppCompatActivity {
 
     private Button viewUpcomingEventsButton;
+    private Button searchForEventsButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,16 @@ public class AttendeeHomepageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AttendeeHomepageActivity.this, UpcomingEventsActivityForAttendee.class);
+                startActivity(intent);
+            }
+        });
+
+        searchForEventsButton = findViewById(R.id.searchForEventsButton);
+
+        searchForEventsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AttendeeHomepageActivity.this, FilteredUpcomingEventsActivityForAttendee.class);
                 startActivity(intent);
             }
         });

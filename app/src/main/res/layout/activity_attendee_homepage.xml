@@ -18,9 +18,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="16dp"/>
 
-    <!-- Upcoming Events Section -->
+    <!-- Available Upcoming Events Section -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/upcomingEventsCard"
         android:layout_width="0dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@id/attendeeTitleText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         app:cardCornerRadius="12dp"
@@ -39,17 +39,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="12dp">
 
             <TextView
                 android:id="@+id/upcomingEventsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Your Upcoming Events"
+                android:text="Available Upcoming Events"
                 android:textSize="20sp"
                 android:textColor="#E0E0E0"
                 android:fontFamily="sans-serif"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="8dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/viewUpcomingEventsButton"
@@ -58,18 +58,18 @@
                 android:text="View Events"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:padding="12dp"
+                android:padding="8dp"
                 app:cornerRadius="8dp"
                 android:backgroundTint="#4CAF50"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="8dp"/>
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Search Events Section -->
+    <!-- Search Upcoming Events Section -->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/searchEventsCard"
+        android:id="@+id/searchForEventsCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/upcomingEventsCard"
@@ -82,7 +82,35 @@
         app:cardElevation="4dp"
         app:cardBackgroundColor="#1A1A1A">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
 
+            <TextView
+                android:id="@+id/searchForEventsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Search for Upcoming Events"
+                android:textSize="20sp"
+                android:textColor="#E0E0E0"
+                android:fontFamily="sans-serif"
+                android:layout_marginBottom="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/searchForEventsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Search Events"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:padding="8dp"
+                app:cornerRadius="8dp"
+                android:backgroundTint="#4CAF50"
+                android:layout_marginBottom="8dp"/>
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -100,7 +128,7 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         app:strokeColor="#4CAF50"
         app:strokeWidth="2dp"
-        app:layout_constraintTop_toBottomOf="@id/searchEventsCard"
+        app:layout_constraintTop_toBottomOf="@id/searchForEventsCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="24dp"

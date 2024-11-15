@@ -1,0 +1,12 @@
+# Build and dependency files
+/build/
+.gradle/
+
+# Local configuration (contains local paths)
+local.properties
+
+# Android Studio/IntelliJ specific files
+.idea/
+
+# macOS specific
+.DS_Store
