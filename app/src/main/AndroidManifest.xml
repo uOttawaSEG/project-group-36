@@ -27,6 +27,9 @@
             android:name=".PastEventsActivity"
             android:exported="false" />
         <activity
+            android:name=".AttendeeApprovedEventsActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreateEventActivity"
             android:exported="false" /> <!-- Existing Activities -->
         <activity

@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -54,7 +57,7 @@ public class PendingParticipantActivity extends AppCompatActivity {
                         participantsLayout.removeAllViews();  // Clear previous entries
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             String userId = document.getId();
-                            fetchUserDetails(userId);  // Fetch details for each user ID
+                            fetchUserDetails(userId);
                         }
                     } else {
                         System.out.println("Error fetching documents: " + task.getException());
@@ -66,7 +69,7 @@ public class PendingParticipantActivity extends AppCompatActivity {
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        String name = documentSnapshot.getString("firstName");  // Use the correct field key
+                        String name = documentSnapshot.getString("firstName");
                         addParticipantCard(name, userId);
                     } else {
                         System.out.println("User not found: " + userId);
@@ -83,14 +86,8 @@ public class PendingParticipantActivity extends AppCompatActivity {
         TextView nameTextView = cardView.findViewById(R.id.emailTextView);
         nameTextView.setText(name);
 
-        MaterialButton detailsButton = cardView.findViewById(R.id.detailsButton);
-        detailsButton.setOnClickListener(v -> {
-            // Assuming the User class has a method to fetch and display user details
-            User.fetchAndDisplayUserDetails(PendingParticipantActivity.this, userId);
-        });
-
         MaterialButton acceptButton = cardView.findViewById(R.id.acceptButton);
-        acceptButton.setOnClickListener(v -> updateParticipantStatus(userId, "approved"));
+        acceptButton.setOnClickListener(v -> approveParticipant(userId));
 
         MaterialButton rejectButton = cardView.findViewById(R.id.rejectButton);
         rejectButton.setOnClickListener(v -> updateParticipantStatus(userId, "rejected"));
@@ -98,17 +95,27 @@ public class PendingParticipantActivity extends AppCompatActivity {
         participantsLayout.addView(cardView);
     }
 
-    private void updateParticipantStatus(String userId, String newStatus) {
+    private void approveParticipant(String userId) {
         db.collection("events").document(eventId).collection("attendees").document(userId)
-                .update("status", newStatus)
+                .update("status", "approved")
                 .addOnSuccessListener(aVoid -> {
-                    System.out.println("Status updated to " + newStatus + " for user " + userId);
-                    // Refresh the list to reflect changes
-                    fetchPendingParticipants();
+                    db.collection("events").document(eventId)
+                            .update("approvedAttendees", FieldValue.arrayUnion(userId)) // Add to approved attendees list
+                            .addOnSuccessListener(unused -> {
+                                Toast.makeText(this, "Attendee approved and added to approved list.", Toast.LENGTH_SHORT).show();
+                                fetchPendingParticipants(); // Refresh the list
+                            });
                 })
                 .addOnFailureListener(e -> {
                     System.err.println("Error updating status: " + e.getMessage());
                 });
+    }
+
+    private void updateParticipantStatus(String userId, String newStatus) {
+        db.collection("events").document(eventId).collection("attendees").document(userId)
+                .update("status", newStatus)
+                .addOnSuccessListener(aVoid -> fetchPendingParticipants())
+                .addOnFailureListener(e -> System.err.println("Error updating status: " + e.getMessage()));
     }
 
     private void updateAllParticipantsStatus(String newStatus) {
@@ -118,7 +125,12 @@ public class PendingParticipantActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            updateParticipantStatus(document.getId(), newStatus);
+                            String userId = document.getId();
+                            if (newStatus.equals("approved")) {
+                                approveParticipant(userId);
+                            } else {
+                                updateParticipantStatus(userId, newStatus);
+                            }
                         }
                     } else {
                         System.out.println("Error updating all participants: " + task.getException());
@@ -126,4 +138,3 @@ public class PendingParticipantActivity extends AppCompatActivity {
                 });
     }
 }
-
