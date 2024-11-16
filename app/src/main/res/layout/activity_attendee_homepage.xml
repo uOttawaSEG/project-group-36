@@ -135,4 +135,52 @@
         android:layout_marginEnd="24dp"
         android:layout_marginTop="16dp"/>
 
+    <!-- Approved Events Section -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/approvedEventsCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/searchForEventsCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#1A1A1A">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/approvedEventsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Approved Events"
+                android:textSize="20sp"
+                android:textColor="#E0E0E0"
+                android:fontFamily="sans-serif"
+                android:layout_marginBottom="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/openApprovedEventsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Approved Events"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:padding="8dp"
+                app:cornerRadius="8dp"
+                android:backgroundTint="#2049C8"
+                android:layout_marginBottom="8dp"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

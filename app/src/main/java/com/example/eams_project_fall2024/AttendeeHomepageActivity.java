@@ -18,7 +18,7 @@ public class AttendeeHomepageActivity extends AppCompatActivity {
 
     private Button viewUpcomingEventsButton;
     private Button searchForEventsButton;
-
+    private Button openApprovedEventsButton; // New button for approved events
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +26,8 @@ public class AttendeeHomepageActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_attendee_homepage);
 
+        // Initialize the "View Upcoming Events" button
         viewUpcomingEventsButton = findViewById(R.id.viewUpcomingEventsButton);
-
         viewUpcomingEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,8 +36,8 @@ public class AttendeeHomepageActivity extends AppCompatActivity {
             }
         });
 
+        // Initialize the "Search for Events" button
         searchForEventsButton = findViewById(R.id.searchForEventsButton);
-
         searchForEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +46,15 @@ public class AttendeeHomepageActivity extends AppCompatActivity {
             }
         });
 
+        // Initialize the "View Approved Events" button
+        openApprovedEventsButton = findViewById(R.id.openApprovedEventsButton); // Link to the button in the layout
+        openApprovedEventsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AttendeeHomepageActivity.this, AttendeeApprovedEventsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void logout(View view) {
@@ -63,6 +72,5 @@ public class AttendeeHomepageActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
-
     }
 }
