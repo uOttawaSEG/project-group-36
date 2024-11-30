@@ -15,6 +15,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.Date;
@@ -47,6 +48,7 @@ public class AttendeeRegisteredEventsActivity extends AppCompatActivity {
 
         db.collection("events")
                 .whereGreaterThan("eventDate", currentDate) // Only fetch events with dates in the future
+                .orderBy("eventDate", Query.Direction.ASCENDING) // Order by eventDate in ascending order
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -80,6 +82,7 @@ public class AttendeeRegisteredEventsActivity extends AppCompatActivity {
                     }
                 });
     }
+
 
 
     private void addRegisteredEventItem(String eventName, String eventId) {
