@@ -26,6 +26,8 @@
         <activity
             android:name=".PastEventsActivity"
             android:exported="false" />
+        <activity android:name=".AttendeeRegisteredEventsActivity"
+            android:exported="false" />
         <activity
             android:name=".AttendeeApprovedEventsActivity"
             android:exported="false" />

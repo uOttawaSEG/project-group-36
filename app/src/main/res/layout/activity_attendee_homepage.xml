@@ -2,11 +2,47 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0A0A0A">
 
     <!-- Title Section -->
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="112dp"
+        android:orientation="vertical"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/approvedEventsCard"
+        tools:layout_editor_absoluteX="19dp">
+
+
+        <TextView
+            android:id="@+id/registeredEventsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif"
+            android:text="View Registered Events"
+            android:textColor="#E0E0E0"
+            android:textSize="20sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/openregisteredEventsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#2049C8"
+            android:padding="8dp"
+            android:text="View Registered Events"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:cornerRadius="8dp" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/attendeeTitleText"
         android:layout_width="wrap_content"

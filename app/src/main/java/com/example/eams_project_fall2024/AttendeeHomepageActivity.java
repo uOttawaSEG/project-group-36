@@ -36,6 +36,16 @@ public class AttendeeHomepageActivity extends AppCompatActivity {
             }
         });
 
+        //Initialize the "registeredEventsButton"
+        searchForEventsButton = findViewById(R.id.openregisteredEventsButton);
+        searchForEventsButton.setOnClickListener(new View.OnClickListener() {
+                                                     @Override
+                                                     public void onClick(View v) {
+                                                         Intent intent = new Intent(AttendeeHomepageActivity.this, AttendeeRegisteredEventsActivity.class);
+                                                         startActivity(intent);
+                                                     }
+                                                 });
+
         // Initialize the "Search for Events" button
         searchForEventsButton = findViewById(R.id.searchForEventsButton);
         searchForEventsButton.setOnClickListener(new View.OnClickListener() {

@@ -111,42 +111,53 @@ public class UpcomingEventsActivityForAttendee extends AppCompatActivity {
                 .addOnFailureListener(e -> Toast.makeText(this, "Failed to retrieve event details: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
-    private void registerAttendee(String eventId, String status, String message) {
+    private void registerAttendee(String eventId, String defaultStatus, String defaultMessage) {
         String attendeeId = auth.getCurrentUser().getUid();
 
         Log.d("RegisterAttendee", "Attempting to register for event: " + eventId);
         db.collection("events").document(eventId).get()
                 .addOnSuccessListener(documentSnapshot -> {
-                    // Retrieve the event details
-                    Date eventDate = documentSnapshot.getDate("eventDate");
-                    Date startTime = documentSnapshot.getDate("startTime");
-                    Date endTime = documentSnapshot.getDate("endTime");
+                    if (documentSnapshot.exists()) {
+                        Date eventDate = documentSnapshot.getDate("eventDate");
+                        Date startTime = documentSnapshot.getDate("startTime");
+                        Date endTime = documentSnapshot.getDate("endTime");
+                        Boolean isAutoApproval = documentSnapshot.getBoolean("isAutoApproval");
 
-                    Log.d("RegisterAttendee", "Retrieved event details: Date=" + eventDate + ", Start=" + startTime + ", End=" + endTime);
-                    if (eventDate != null && startTime != null && endTime != null) {
-                        checkForConflicts(attendeeId, eventDate, startTime, endTime, () -> {
-                            // No conflict: Proceed with registration
-                            Map<String, Object> attendee = new HashMap<>();
-                            attendee.put("attendeeId", attendeeId);
-                            attendee.put("status", status);
+                        Log.d("RegisterAttendee", "Retrieved event details: Date=" + eventDate + ", Start=" + startTime + ", End=" + endTime + ", AutoApproval=" + isAutoApproval);
+                        if (eventDate != null && startTime != null && endTime != null) {
+                            checkForConflicts(attendeeId, eventDate, startTime, endTime, () -> {
+                                // Determine status and message based on isAutoApproval
+                                String status = (isAutoApproval != null && isAutoApproval) ? "approved" : defaultStatus;
+                                String message = (isAutoApproval != null && isAutoApproval)
+                                        ? "Your signup has been automatically approved."
+                                        : defaultMessage;
 
-                            db.collection("events").document(eventId).collection("attendees").document(attendeeId)
-                                    .set(attendee)
-                                    .addOnSuccessListener(aVoid -> {
-                                        Log.d("RegisterAttendee", "Successfully registered for the event.");
-                                        new AlertDialog.Builder(this)
-                                                .setMessage(message)
-                                                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-                                                .show();
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        Log.e("RegisterAttendee", "Failed to sign up for the event", e);
-                                        Toast.makeText(this, "Failed to sign up for the event: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    });
-                        });
+                                // Proceed with registration
+                                Map<String, Object> attendee = new HashMap<>();
+                                attendee.put("attendeeId", attendeeId);
+                                attendee.put("status", status);
+
+                                db.collection("events").document(eventId).collection("attendees").document(attendeeId)
+                                        .set(attendee)
+                                        .addOnSuccessListener(aVoid -> {
+                                            Log.d("RegisterAttendee", "Successfully registered for the event with status: " + status);
+                                            new AlertDialog.Builder(this)
+                                                    .setMessage(message)
+                                                    .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                                                    .show();
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Log.e("RegisterAttendee", "Failed to sign up for the event", e);
+                                            Toast.makeText(this, "Failed to sign up for the event: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        });
+                            });
+                        } else {
+                            Log.e("RegisterAttendee", "Event time information is missing.");
+                            Toast.makeText(this, "Event time information is missing.", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Log.e("RegisterAttendee", "Event time information is missing.");
-                        Toast.makeText(this, "Event time information is missing.", Toast.LENGTH_SHORT).show();
+                        Log.e("RegisterAttendee", "Event not found.");
+                        Toast.makeText(this, "Event not found.", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -154,6 +165,7 @@ public class UpcomingEventsActivityForAttendee extends AppCompatActivity {
                     Toast.makeText(this, "Failed to retrieve event details: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
+
 
     private void checkForConflicts(String attendeeId, Date eventDate, Date startTime, Date endTime, Runnable onSuccess) {
         Log.d("ConflictCheck", "Starting conflict check for AttendeeID=" + attendeeId);
