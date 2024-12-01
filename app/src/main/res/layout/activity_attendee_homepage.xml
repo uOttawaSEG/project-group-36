@@ -15,8 +15,11 @@
         android:orientation="vertical"
         android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/approvedEventsCard"
-        tools:layout_editor_absoluteX="19dp">
+        app:layout_constraintVertical_bias="0.066">
 
 
         <TextView
@@ -151,27 +154,30 @@
     </com.google.android.material.card.MaterialCardView>
 
     <!-- Logout Button -->
+
+    <!-- Approved Events Section -->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logoutButton"
-        android:onClick="logout"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="292dp"
+        android:layout_marginEnd="24dp"
+        android:onClick="logout"
+        android:padding="12dp"
         android:text="Logout"
         android:textColor="#4CAF50"
         android:textSize="16sp"
-        android:padding="12dp"
         app:cornerRadius="8dp"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        app:strokeColor="#4CAF50"
-        app:strokeWidth="2dp"
-        app:layout_constraintTop_toBottomOf="@id/searchForEventsCard"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchForEventsCard"
+        app:strokeColor="#4CAF50"
+        app:strokeWidth="2dp" />
 
-    <!-- Approved Events Section -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/approvedEventsCard"
         android:layout_width="0dp"
